@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Perfil</title>
+    <link rel="stylesheet" th:href="@{/libs/bootstrap461/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/libs/fontawesomefree611/css/all.css}">
+    <link rel="stylesheet" th:href="@{/styles/style.css}">
+</head>
+<body class="home">
+
+<div class="home container-fluid">
+
+    <div th:insert="/fragments/logo :: logo"></div>
+
+    <header class="sticky-top container-fluid" th:insert="/fragments/nav :: nav-principal">
+    </header>
+    <main class="container pt-3">
+        <article class="profile row">
+            <section class="profile--header px-5 pt-5 pb-md-5 col-md-6">
+                <img class="profile--image col-md-8" src="/assets/profile.jpg" alt="">
+                <h1 class="h4 p-2" th:text="${profile.nombre}+' '+${profile.apellidos}"></h1>
+            </section>
+            <section class="profile--body col-md-6">
+                <div class="text-center text-md-left">
+                    <p>
+                        <i class="fa-solid fa-envelope"></i>
+                        <span th:text="${profile.email}"></span>
+                    </p>
+                    <p>
+                        <i class="fa-solid fa-phone"></i>
+                        <span th:text="${profile.telefono}"></span>
+                    </p>
+                    <p>
+                        <span th:text="${profile.pais}"></span> -
+                        <span th:text="${profile.ciudad}"></span>
+                    </p>
+                </div>
+            </section>
+        </article>
+    </main>
+</div>
+<script th:src=" @{/libs/bootstrap461/js/bootstrap.min.js}"></script>
+</body>
+</html>

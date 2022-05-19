@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Lista de perfiles</title>
+    <link rel="stylesheet" th:href="@{/libs/bootstrap461/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/libs/fontawesomefree611/css/all.css}">
+    <link rel="stylesheet" th:href="@{/styles/style.css}">
+</head>
+<body class="home">
+
+<div class="home container-fluid">
+
+    <div th:insert="/fragments/logo :: logo"></div>
+
+    <header class="sticky-top container-fluid" th:insert="/fragments/nav :: nav-principal">
+    </header>
+    <main class="container pt-3">
+        <table class="table table-bordered table-hover">
+            <thead>
+            <tr class="text-center">
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Apellidos</th>
+                <th>Email</th>
+                <th>Teléfono</th>
+                <th>Pais</th>
+                <th>Ciudad</th>
+                <th>Opciones</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="profile: ${profiles}">
+                <td th:text="${profile.id}"></td>
+                <td th:text="${profile.nombre}"></td>
+                <td th:text="${profile.apellidos}"></td>
+                <td th:text="${profile.email}"></td>
+                <td th:text="${profile.telefono}"></td>
+                <td th:text="${profile.pais}"></td>
+                <td th:text="${profile.ciudad}"></td>
+                <td class="text-center">
+                    <a th:href="@{/profile/{id} (id = ${profile.id}) }" class="btn btn-sm btn-primary">
+                        <i class="fa-solid fa-eye"></i>
+                        Detalle
+                    </a>
+                </td>
+            </tr>
+            <tr th:if="${#lists.isEmpty(profiles)}">
+                <td class="text-center" colspan="8">
+                    No se han registrado perfiles
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </main>
+</div>
+<script th:src=" @{/libs/bootstrap461/js/bootstrap.min.js}"></script>
+</body>
+</html>
