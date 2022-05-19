@@ -13,7 +13,7 @@
 
 <div class="home container-fluid">
     <div th:insert="/fragments/logo :: logo"></div>
-    <header class="sticky-top container-fluid" th:insert="/fragments/nav :: nav-principal">
+    <header class="sticky-top container-fluid p-0" th:insert="/fragments/nav :: nav-principal">
     </header>
     <main class="container pt-4 d-flex justify-content-center pb-5">
         <section class="card">
@@ -54,7 +54,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row pb-2">
                     <div class="col-md-6 mb-3">
                         <label for="pais">Pais</label>
                         <select class="form-control" name="pais" id="pais" required="">

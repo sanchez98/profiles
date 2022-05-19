@@ -16,7 +16,7 @@
 
     <div th:insert="/fragments/logo :: logo"></div>
 
-    <header class="sticky-top container-fluid" th:insert="/fragments/nav :: nav-principal">
+    <header class="sticky-top container-fluid p-0" th:insert="/fragments/nav :: nav-principal">
     </header>
     <main class="container pt-3">
         <article class="profile row">
@@ -35,6 +35,7 @@
                         <span th:text="${profile.telefono}"></span>
                     </p>
                     <p>
+                        <i class="fa-solid fa-earth-americas"></i>
                         <span th:text="${profile.pais}"></span> -
                         <span th:text="${profile.ciudad}"></span>
                     </p>
