@@ -11,7 +11,7 @@ import java.util.List;
 @Service
 public class CityServiceImpl implements CityService {
 
-    City[] cities;
+    private City[] cities;
 
     public CityServiceImpl() {
         String url = "https://62857120f0e8f0bb7c0408ef.mockapi.io/api/v1/city";
