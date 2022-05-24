@@ -37,4 +37,16 @@ public class City {
                 ", id=" + id +
                 '}';
     }
+
+    public City(int id, String country, String name) {
+        this.name = name;
+        this.country = country;
+        this.id = id;
+    }
+
+    public City() {
+        this.name = null;
+        this.country = null;
+        this.id = 0;
+    }
 }

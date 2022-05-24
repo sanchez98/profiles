@@ -16,9 +16,16 @@ public class CityServiceImpl implements CityService {
     public CityServiceImpl() {
         String url = "https://62857120f0e8f0bb7c0408ef.mockapi.io/api/v1/city";
         RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<City[]> response = restTemplate
-                .getForEntity(url, City[].class);
-        cities = response.getBody();
+        try {
+            ResponseEntity<City[]> response = restTemplate
+                    .getForEntity(url, City[].class);
+            cities = response.getBody();
+        } catch (Exception e) {
+            cities = new City[2];
+            cities[0] = new City(1, "CO", "Medellin");
+            cities[1] = new City(2, "CO", "Popayán");
+            System.out.println(e.getMessage());
+        }
     }
 
     @Override

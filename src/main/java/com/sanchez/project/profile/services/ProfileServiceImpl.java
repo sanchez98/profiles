@@ -23,27 +23,42 @@ public class ProfileServiceImpl implements ProfileService {
         body.add("pais", profile.getPais());
 
         RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<Profile> response = restTemplate
-                .postForEntity(url, body, Profile.class);
+        try {
+            ResponseEntity<Profile> response = restTemplate
+                    .postForEntity(url, body, Profile.class);
+            return response.getBody();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
 
-        return response.getBody();
+        return profile;
     }
 
     @Override
     public Profile[] getProfiles() {
         RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<Profile[]> response = restTemplate
-                .getForEntity(url, Profile[].class);
-        return response.getBody();
+        try {
+            ResponseEntity<Profile[]> response = restTemplate
+                    .getForEntity(url, Profile[].class);
+            return response.getBody();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return null;
     }
 
     @Override
     public Profile getProfileById(Integer idProfile) {
         String url = this.url + "/" + idProfile;
         RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<Profile> response = restTemplate
-                .getForEntity(url, Profile.class);
-        return response.getBody();
+        try {
+            ResponseEntity<Profile> response = restTemplate
+                    .getForEntity(url, Profile.class);
+            return response.getBody();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return null;
     }
 
 

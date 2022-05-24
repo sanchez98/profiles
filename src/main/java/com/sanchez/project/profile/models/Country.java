@@ -27,4 +27,13 @@ public class Country {
                 ", name='" + name + '\'' +
                 '}';
     }
+
+    public Country() {
+        this.code = null;
+        this.name = null;
+    }
+    public Country(String code, String name) {
+        this.code = code;
+        this.name = name;
+    }
 }

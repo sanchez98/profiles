@@ -15,9 +15,15 @@ public class CountryServiceImpl implements CountryService {
     public CountryServiceImpl() {
         String url = "https://62857120f0e8f0bb7c0408ef.mockapi.io/api/v1/country";
         RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<Country[]> response = restTemplate
-                .getForEntity(url, Country[].class);
-        countries = response.getBody();
+        try {
+            ResponseEntity<Country[]> response = restTemplate
+                    .getForEntity(url, Country[].class);
+            countries = response.getBody();
+        } catch (Exception e) {
+            countries = new Country[1];
+            countries[0] = new Country("CO", "Colombia");
+            System.out.println(e.getMessage());
+        }
     }
 
     @Override
@@ -27,8 +33,8 @@ public class CountryServiceImpl implements CountryService {
 
     @Override
     public String getNameCountry(String codeCountry) {
-        for(Country country: countries) {
-            if (codeCountry.toUpperCase(Locale.ROOT).equals(country.getCode())){
+        for (Country country : countries) {
+            if (codeCountry.toUpperCase(Locale.ROOT).equals(country.getCode())) {
                 return country.getName();
             }
         }
