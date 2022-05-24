@@ -1,9 +1,9 @@
 package com.sanchez.project.profile.services;
 
 import com.sanchez.project.profile.models.Country;
-import org.springframework.http.ResponseEntity;
+import com.sanchez.project.profile.utils.MockAPI;
+import com.sanchez.project.profile.utils.MockAPIImpl;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 import java.util.Locale;
 
@@ -13,17 +13,22 @@ public class CountryServiceImpl implements CountryService {
     private Country[] countries;
 
     public CountryServiceImpl() {
+        this.loadCountries();
+    }
+
+    private void loadCountries() {
+        MockAPI<Country[]> mockAPI = new MockAPIImpl<>();
         String url = "https://62857120f0e8f0bb7c0408ef.mockapi.io/api/v1/country";
-        RestTemplate restTemplate = new RestTemplate();
-        try {
-            ResponseEntity<Country[]> response = restTemplate
-                    .getForEntity(url, Country[].class);
-            countries = response.getBody();
-        } catch (Exception e) {
-            countries = new Country[1];
-            countries[0] = new Country("CO", "Colombia");
-            System.out.println(e.getMessage());
+        countries = mockAPI.get(url, Country[].class);
+        if (countries == null) {
+            this.loadDefaultCountries();
         }
+    }
+
+    private void loadDefaultCountries() {
+        countries = new Country[2];
+        countries[0] = new Country("CO", "Colombia");
+        countries[1] = new Country("EC", "Ecuador");
     }
 
     @Override

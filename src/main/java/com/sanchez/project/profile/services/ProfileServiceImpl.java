@@ -1,11 +1,11 @@
 package com.sanchez.project.profile.services;
 
 import com.sanchez.project.profile.models.Profile;
-import org.springframework.http.ResponseEntity;
+import com.sanchez.project.profile.utils.MockAPI;
+import com.sanchez.project.profile.utils.MockAPIImpl;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.client.RestTemplate;
 
 @Service
 public class ProfileServiceImpl implements ProfileService {
@@ -22,13 +22,10 @@ public class ProfileServiceImpl implements ProfileService {
         body.add("ciudad", profile.getCiudad());
         body.add("pais", profile.getPais());
 
-        RestTemplate restTemplate = new RestTemplate();
-        try {
-            ResponseEntity<Profile> response = restTemplate
-                    .postForEntity(url, body, Profile.class);
-            return response.getBody();
-        } catch (Exception e) {
-            System.out.println(e);
+        MockAPI<Profile> mockAPI = new MockAPIImpl<>();
+        Profile response = mockAPI.post(url, body, Profile.class);
+        if (response != null) {
+            return response;
         }
 
         return profile;
@@ -36,29 +33,15 @@ public class ProfileServiceImpl implements ProfileService {
 
     @Override
     public Profile[] getProfiles() {
-        RestTemplate restTemplate = new RestTemplate();
-        try {
-            ResponseEntity<Profile[]> response = restTemplate
-                    .getForEntity(url, Profile[].class);
-            return response.getBody();
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-        return null;
+        MockAPI<Profile[]> mockAPI = new MockAPIImpl<>();
+        return mockAPI.get(url, Profile[].class);
     }
 
     @Override
     public Profile getProfileById(Integer idProfile) {
         String url = this.url + "/" + idProfile;
-        RestTemplate restTemplate = new RestTemplate();
-        try {
-            ResponseEntity<Profile> response = restTemplate
-                    .getForEntity(url, Profile.class);
-            return response.getBody();
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-        return null;
+        MockAPI<Profile> mockAPI = new MockAPIImpl<>();
+        return mockAPI.get(url, Profile.class);
     }
 
 
